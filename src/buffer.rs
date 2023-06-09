@@ -8,13 +8,14 @@ use std::{
     cmp::min,
     fmt::{Debug, Formatter, Result},
 };
+use smartstring::alias::CompactString;
 use unicode_segmentation::UnicodeSegmentation;
 use unicode_width::UnicodeWidthStr;
 
 /// A buffer cell
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Cell {
-    pub symbol: String,
+    pub symbol: CompactString,
     pub fg: Color,
     pub bg: Color,
     pub modifier: Modifier,
@@ -101,7 +102,7 @@ impl Default for Cell {
 /// assert_eq!(buf.get(0, 2).symbol, "x");
 /// buf.set_string(3, 0, "string", Style::default().fg(Color::Red).bg(Color::White));
 /// assert_eq!(buf.get(5, 0), &Cell{
-///     symbol: String::from("r"),
+///     symbol: "r".into(),
 ///     fg: Color::Red,
 ///     bg: Color::White,
 ///     modifier: Modifier::empty()
